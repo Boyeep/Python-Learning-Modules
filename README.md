@@ -1,11 +1,22 @@
 # Python Learning Modules
 
+![English](https://img.shields.io/badge/Language-English-2563eb)
+![Bahasa Indonesia](https://img.shields.io/badge/Language-Bahasa_Indonesia-16a34a)
+![Theory First](https://img.shields.io/badge/Focus-Theory_First-f59e0b)
+![Modules](https://img.shields.io/badge/Lessons-11-7c3aed)
+
 A theory-first Python learning repository with two parallel versions:
 
 - English modules in [`modules/`](./modules/README.md)
 - Indonesian modules in [`modules-id/`](./modules-id/README.md)
 
 The goal of this repo is to help learners understand Python as a set of ideas, not just as a list of syntax rules.
+
+## Quick Start
+
+- Start in English: [English Curriculum Index](./modules/README.md)
+- Start in Bahasa Indonesia: [Indonesian Curriculum Index](./modules-id/README.md)
+- Best study order: Track 1 -> Track 2 -> Track 3
 
 ## What This Repo Contains
 
@@ -21,46 +32,26 @@ Each track is split into smaller Markdown lessons so the material stays readable
 
 ## Language Versions
 
-### English
-
-Start here if you want the English curriculum:
-
-- [English Curriculum Index](./modules/README.md)
-
-### Bahasa Indonesia
-
-Start here if you want the Indonesian curriculum:
-
-- [Indonesian Curriculum Index](./modules-id/README.md)
+| Language | Entry Point | Notes |
+| --- | --- | --- |
+| English | [modules/README.md](./modules/README.md) | Full curriculum in English |
+| Bahasa Indonesia | [modules-id/README.md](./modules-id/README.md) | Full curriculum in Indonesian |
 
 ## Curriculum Structure
 
-### Track 1: Basic Python
+| Track | Main Topic | Key Lessons |
+| --- | --- | --- |
+| Track 1 | Basic Python | variables and data types, operators and strings, conditionals and control flow, data structures and functions, error handling |
+| Track 2 | Multi-File and Built-ins | modules and `__main__`, docstrings, Python standard library, file I/O |
+| Track 3 | Developer Environment | project structure, Python packages, `pip`, `venv`, and Conda |
 
-Covers:
+## Curriculum Overview
 
-- variables and data types
-- operators and string manipulation
-- conditionals and control flow
-- data structures and functions
-- error handling
-
-### Track 2: Multi-File and Built-ins
-
-Covers:
-
-- modules and `__main__`
-- docstrings
-- Python standard library
-- file I/O
-
-### Track 3: Developer Environment
-
-Covers:
-
-- structuring a Python project
-- Python packages
-- `pip`, `venv`, and Conda
+| Track | English | Bahasa Indonesia |
+| --- | --- | --- |
+| Track 1: Basic Python | [Open](./modules/01-belajar-basic/README.md) | [Buka](./modules-id/01-belajar-basic/README.md) |
+| Track 2: Multi-File and Built-ins | [Open](./modules/02-multi-file-and-builtins/README.md) | [Buka](./modules-id/02-multi-file-and-builtins/README.md) |
+| Track 3: Developer Environment | [Open](./modules/03-developer-environment/README.md) | [Buka](./modules-id/03-developer-environment/README.md) |
 
 ## Recommended Study Order
 
@@ -76,6 +67,17 @@ For each lesson:
 2. Type the example code yourself instead of only reading it.
 3. Answer the practice prompts.
 4. Check the mastery checklist before moving on.
+
+## At a Glance
+
+| Feature | Included |
+| --- | --- |
+| English curriculum | Yes |
+| Indonesian curriculum | Yes |
+| Theory-first explanations | Yes |
+| Small lesson files | Yes |
+| Practice prompts | Yes |
+| Mastery checklists | Yes |
 
 ## Who This Repo Is For
 
