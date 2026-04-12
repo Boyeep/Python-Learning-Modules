@@ -9,6 +9,8 @@ A theory-first Python learning repository with two parallel versions:
 
 - English modules in [`modules/`](./modules/README.md)
 - Indonesian modules in [`modules-id/`](./modules-id/README.md)
+- English practice in [`practice/`](./practice/README.md)
+- Indonesian practice in [`practice-id/`](./practice-id/README.md)
 
 The goal of this repo is to help learners understand Python as a set of ideas, not just as a list of syntax rules.
 
@@ -16,6 +18,8 @@ The goal of this repo is to help learners understand Python as a set of ideas, n
 
 - Start in English: [English Curriculum Index](./modules/README.md)
 - Start in Bahasa Indonesia: [Indonesian Curriculum Index](./modules-id/README.md)
+- Practice in English: [English Practice Index](./practice/README.md)
+- Practice in Bahasa Indonesia: [Indonesian Practice Index](./practice-id/README.md)
 - Best study order: Track 1 -> Track 2 -> Track 3
 
 ## What This Repo Contains
@@ -36,6 +40,13 @@ Each track is split into smaller Markdown lessons so the material stays readable
 | --- | --- | --- |
 | English | [modules/README.md](./modules/README.md) | Full curriculum in English |
 | Bahasa Indonesia | [modules-id/README.md](./modules-id/README.md) | Full curriculum in Indonesian |
+
+## Practice Workbooks
+
+| Language | Entry Point | Notes |
+| --- | --- | --- |
+| English | [practice/README.md](./practice/README.md) | Track-based exercises matching the English modules |
+| Bahasa Indonesia | [practice-id/README.md](./practice-id/README.md) | Track-based exercises matching the Indonesian modules |
 
 ## Curriculum Structure
 
@@ -74,6 +85,8 @@ For each lesson:
 | --- | --- |
 | English curriculum | Yes |
 | Indonesian curriculum | Yes |
+| English practice workbooks | Yes |
+| Indonesian practice workbooks | Yes |
 | Theory-first explanations | Yes |
 | Small lesson files | Yes |
 | Practice prompts | Yes |
