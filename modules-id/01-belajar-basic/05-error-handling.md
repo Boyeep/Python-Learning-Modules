@@ -5,6 +5,8 @@
 Di akhir lesson ini, kamu diharapkan memahami:
 
 - apa itu exception dan bagaimana bedanya dengan syntax error
+- bagaimana syntax error, runtime error, dan logical error berbeda
+- kenapa debugging dan input validation itu penting
 - bagaimana `try`, `except`, `else`, dan `finally` bekerja bersama
 - kenapa error handling sebaiknya spesifik dan disengaja
 - kapan masuk akal untuk melempar exception sendiri
@@ -35,6 +37,16 @@ Error handling adalah soal keseimbangan.
 
 ## Teori Inti
 
+### Jenis-Jenis Error
+
+Error dalam programming sering dibagi ke tiga kategori besar:
+
+- syntax error
+- runtime error
+- logical error
+
+Masing-masing punya perilaku yang berbeda.
+
 ### Syntax Error vs Exception
 
 Syntax error berarti Python tidak bisa memahami struktur code itu sendiri.
@@ -48,6 +60,23 @@ Contohnya:
 
 Perbedaan ini penting karena exception sering bisa ditangani oleh code, sedangkan syntax error harus diperbaiki di source code.
 
+### Logical Error
+
+Logical error terjadi ketika program tetap berjalan, tetapi hasilnya salah karena logika di dalam code salah.
+
+Contoh:
+
+```python
+age = 18
+
+if age > 18:
+    print("Adult")
+```
+
+Code ini tetap berjalan, tetapi hasilnya salah untuk umur `18` jika aturan yang benar adalah "18 atau lebih".
+
+Logical error sering lebih sulit ditemukan karena program tidak selalu crash.
+
 ### Exception yang Umum
 
 Beberapa exception yang sering ditemui pemula:
@@ -60,6 +89,29 @@ Beberapa exception yang sering ditemui pemula:
 - `IndexError`
 
 Mengenali nama-nama ini membantu kamu memahami apa yang sedang dikeluhkan program.
+
+### Debugging
+
+Debugging adalah proses mencari dan memperbaiki masalah.
+
+Biasanya debugging melibatkan:
+
+- membaca pesan error dengan teliti
+- memeriksa value variabel saat ini
+- menguji asumsi langkah demi langkah
+- menyederhanakan masalah menjadi contoh yang lebih kecil
+
+Salah satu pola debugging paling sederhana untuk pemula adalah mencetak nilai perantara:
+
+```python
+number = 5
+result = number * 2
+
+print("number =", number)
+print("result =", result)
+```
+
+Bahkan pemeriksaan sederhana seperti ini sering cukup untuk menunjukkan apakah program berjalan sesuai dugaan atau tidak.
 
 ### `try` dan `except` Dasar
 
@@ -117,6 +169,25 @@ except Exception:
 ```
 
 Versi yang terlalu luas bisa menyembunyikan bug yang sebenarnya tidak ada hubungannya dengan konversi input.
+
+### Input Validation
+
+Tidak semua masalah harus menunggu sampai exception terjadi.
+Kadang lebih baik input diperiksa lebih dulu.
+
+Contoh:
+
+```python
+age_text = input("Enter age: ")
+
+if age_text.isdigit():
+    age = int(age_text)
+    print("Valid age:", age)
+else:
+    print("Input must be numeric")
+```
+
+Input validation membantu program tetap aman dan mudah diprediksi, terutama saat berurusan dengan input user.
 
 ### Melempar Exception Sendiri
 
@@ -192,21 +263,27 @@ Error handling memberi kamu kesempatan untuk menentukan apa yang harus terjadi s
 
 ## Prompt Latihan
 
-1. Kenapa `except ValueError` sering lebih baik daripada `except Exception`?
-2. Apa peran `finally`, bahkan saat tidak ada error?
-3. Kapan code milikmu sendiri sebaiknya melempar exception daripada diam-diam melanjutkan?
-4. Apa perbedaan syntax error dan exception?
+1. Apa perbedaan syntax error, runtime error, dan logical error?
+2. Kenapa `except ValueError` sering lebih baik daripada `except Exception`?
+3. Apa peran `finally`, bahkan saat tidak ada error?
+4. Kapan code milikmu sendiri sebaiknya melempar exception daripada diam-diam melanjutkan?
+5. Kenapa input validation tetap berguna bahkan sebelum exception handling dipakai?
+6. Kenapa logical error sering lebih sulit terlihat daripada runtime error?
 
 ## Mini Exercise
 
 1. Tulis code yang menangkap `ZeroDivisionError`.
 2. Tulis function yang melempar `ValueError` jika menerima harga negatif.
 3. Buat script kecil yang meminta integer lalu menampilkan pesan yang membantu jika input tidak valid.
+4. Tulis contoh logical error kecil lalu perbaiki.
+5. Tambahkan langkah debugging berbasis `print()` ke snippet perhitungan sederhana.
 
 ## Checklist Penguasaan
 
 - Saya paham apa itu exception.
 - Saya bisa menjelaskan perbedaan syntax error dan runtime exception.
+- Saya bisa menjelaskan perbedaan syntax error, runtime error, dan logical error.
+- Saya paham kenapa debugging dan input validation termasuk praktik dasar programming.
 - Saya bisa membaca dan menulis blok `try`/`except` dasar.
 - Saya tahu kenapa menangkap error terlalu luas bisa berbahaya.
 - Saya paham bahwa melempar exception bisa menjaga kebenaran program.

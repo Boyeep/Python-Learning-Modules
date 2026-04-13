@@ -6,6 +6,7 @@ Di akhir lesson ini, kamu diharapkan memahami:
 
 - bagaimana data structure utama di Python berbeda satu sama lain
 - bagaimana memilih structure berdasarkan masalah yang sedang dihadapi
+- bagaimana konsep klasik seperti array, linked list, stack, dan queue berhubungan dengan Python
 - kenapa function penting untuk code yang reusable dan mudah dibaca
 - bagaimana parameter, return value, dan scope saling berhubungan
 
@@ -28,6 +29,13 @@ Jawaban untuk pertanyaan-pertanyaan itu biasanya melibatkan data structure dan f
 
 ## Teori Inti
 
+### Data Structure Membantu Mengatur Informasi
+
+Data structure adalah cara menyimpan dan mengatur value agar program bisa memakainya dengan rapi.
+
+Semakin banyak data yang ditangani, semakin penting struktur yang jelas.
+Tanpa struktur, code cepat terasa berantakan karena kamu kehilangan gambaran data itu disimpan di mana dan harus diakses bagaimana.
+
 ### List
 
 List adalah koleksi yang terurut dan bisa diubah.
@@ -49,6 +57,22 @@ fruits.append("mango")
 fruits[0]
 len(fruits)
 ```
+
+### Array dan Python List
+
+Di banyak materi programming, array diperkenalkan sebagai kumpulan data berindeks.
+Di Python pemula, padanan sehari-harinya biasanya adalah `list`.
+
+Contoh:
+
+```python
+numbers = [10, 20, 30]
+print(numbers[0])
+numbers.append(40)
+print(numbers)
+```
+
+Jadi ketika materi lama membahas array, sering kali kamu bisa memetakan ide itu ke Python list sambil mengingat bahwa list Python lebih fleksibel daripada banyak array level rendah.
 
 ### Tuple
 
@@ -108,6 +132,65 @@ Kamu memilihnya karena perilakunya cocok dengan kebutuhanmu.
 - pakai `dict` untuk lookup berdasarkan nama
 
 Kebiasaan memilih structure berdasarkan kebutuhan adalah salah satu skill penting dalam programming.
+
+### Linked List Sebagai Konsep
+
+Linked list adalah struktur data yang terdiri dari node-node yang saling terhubung.
+Setiap node menyimpan data dan referensi ke node berikutnya.
+
+Di Python dasar, kamu tidak akan memakai linked list sesering list atau dictionary, tetapi konsep ini penting karena menunjukkan bahwa data bisa dihubungkan sebagai rantai, bukan hanya disimpan lewat index.
+
+Contoh:
+
+```python
+class Node:
+    def __init__(self, data, next_node=None):
+        self.data = data
+        self.next = next_node
+
+node3 = Node(30)
+node2 = Node(20, node3)
+node1 = Node(10, node2)
+
+print(node1.data)
+print(node1.next.data)
+```
+
+Yang terpenting bukan menghafal code-nya.
+Yang terpenting adalah memahami bahwa tiap node menunjuk ke node berikutnya.
+
+### Stack dan Queue
+
+Dua perilaku data structure yang klasik adalah:
+
+- stack -> LIFO, atau Last In First Out
+- queue -> FIFO, atau First In First Out
+
+Contoh stack:
+
+```python
+stack = []
+stack.append("A")
+stack.append("B")
+stack.append("C")
+
+print(stack.pop())  # C
+print(stack.pop())  # B
+```
+
+Contoh queue:
+
+```python
+from collections import deque
+
+queue = deque(["A", "B"])
+queue.append("C")
+
+print(queue.popleft())  # A
+print(queue.popleft())  # B
+```
+
+Konsep ini sering muncul pada antrian tugas, sistem undo, penjadwalan, dan banyak skenario lain.
 
 ### Function Mengemas Perilaku
 
@@ -211,18 +294,25 @@ Kalau variabel adalah kotak-kotak individual, data structure adalah rak dari ban
 
 1. Kapan dictionary lebih tepat daripada list?
 2. Kenapa tuple bisa lebih aman daripada list dalam beberapa situasi?
-3. Apa perbedaan parameter dan argument?
-4. Kenapa return value berbeda dari sekadar print?
+3. Bagaimana Python list mirip dengan konsep array di banyak bahasa?
+4. Apa ide inti dari linked list?
+5. Apa perbedaan stack dan queue?
+6. Apa perbedaan parameter dan argument?
+7. Kenapa return value berbeda dari sekadar print?
 
 ## Mini Exercise
 
 1. Buat dictionary yang merepresentasikan sebuah buku dengan judul, penulis, dan tahun terbit.
 2. Tulis function yang menerima list angka dan mengembalikan angka terbesar.
 3. Buat set dari list yang berisi value berulang lalu periksa hasilnya.
+4. Buat stack sederhana dengan Python list lalu keluarkan dua item.
+5. Buat queue sederhana dengan `collections.deque` lalu keluarkan dua item.
 
 ## Checklist Penguasaan
 
 - Saya bisa menjelaskan list, tuple, set, dan dictionary secara praktis.
+- Saya paham bagaimana cara berpikir array dipetakan ke Python list.
+- Saya tahu ide dasar linked list, stack, dan queue.
 - Saya bisa memilih data structure berdasarkan cara akses yang dibutuhkan.
 - Saya paham kenapa function mengurangi pengulangan dan memperjelas code.
 - Saya tahu fungsi parameter dan return value.

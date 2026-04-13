@@ -6,6 +6,7 @@ Di akhir lesson ini, kamu diharapkan memahami:
 
 - bagaimana Python memutuskan code mana yang berjalan berikutnya
 - bagaimana conditional membuat program bercabang
+- bagaimana nested condition dan pencocokan gaya switch masuk ke dalam pengambilan keputusan
 - bagaimana loop mengulang pekerjaan tanpa menyalin code
 - apa arti truthy dan falsy dalam program nyata
 
@@ -63,6 +64,49 @@ else:
 Dalam contoh ini, hanya satu cabang yang dijalankan.
 Python memeriksa dari atas ke bawah dan berhenti pada kondisi pertama yang benar.
 
+### Nested Condition
+
+Kadang satu keputusan mengarah ke keputusan berikutnya.
+
+Di situlah nested condition dipakai:
+
+```python
+age = 20
+has_ticket = True
+
+if age >= 18:
+    if has_ticket:
+        print("Can enter")
+    else:
+        print("Must buy a ticket first")
+else:
+    print("Too young")
+```
+
+Nested `if` berguna ketika sebuah kondisi baru hanya penting setelah kondisi sebelumnya terpenuhi.
+Tetapi nested logic tetap harus dijaga agar tidak menjadi terlalu dalam dan sulit dibaca.
+
+### Pencocokan Gaya Switch di Python
+
+Banyak bahasa mengajarkan `switch` untuk pilihan tetap.
+Python tradisional biasanya memakai `if` / `elif` / `else`, tetapi Python modern juga punya `match` / `case`.
+
+Contoh:
+
+```python
+day = "monday"
+
+match day:
+    case "monday":
+        print("Start working")
+    case "sunday":
+        print("Rest day")
+    case _:
+        print("Regular day")
+```
+
+Kamu tidak wajib memakai `match` untuk memahami conditional, tetapi penting tahu bahwa Python punya pilihan bercabang yang mirip `switch`.
+
 ### Truthy dan Falsy
 
 Dalam kondisi, Python tidak selalu butuh `True` atau `False` yang literal.
@@ -81,6 +125,27 @@ Value yang umum dianggap falsy:
 Sebagian besar value lainnya dianggap truthy.
 
 Ini berguna, tetapi kondisi tetap sebaiknya ditulis dengan jelas agar niatnya mudah dipahami.
+
+### Kenapa Loop Ada
+
+Loop ada supaya kamu tidak perlu menulis code yang sama berulang kali secara manual.
+
+Tanpa loop:
+
+```python
+print("Hello")
+print("Hello")
+print("Hello")
+```
+
+Dengan loop:
+
+```python
+for _ in range(3):
+    print("Hello")
+```
+
+Ini adalah salah satu cara paling awal programming menghemat usaha dan mengurangi duplikasi.
 
 ### `for` Loop
 
@@ -215,18 +280,24 @@ Mental model ini membantu kamu menalar jalur yang sedang ditempuh program.
 
 1. Apa perbedaan `if`, `for`, dan `while`?
 2. Kenapa string kosong bisa dipakai sebagai value falsy dalam kondisi?
-3. Kapan `break` berguna, dan kapan justru bisa menyembunyikan desain loop yang kurang jelas?
-4. Kenapa `while True` perlu dipakai dengan hati-hati?
+3. Kapan nested condition berguna, dan kapan justru mulai terlalu rumit?
+4. Masalah apa yang diselesaikan `match` / `case` dibanding rantai pemeriksaan nilai yang panjang?
+5. Kapan `break` berguna, dan kapan justru bisa menyembunyikan desain loop yang kurang jelas?
+6. Kenapa `while True` perlu dipakai dengan hati-hati?
 
 ## Mini Exercise
 
 1. Tulis program yang mencetak `"even"` untuk angka genap dan `"odd"` untuk angka ganjil dari `1` sampai `5`.
 2. Buat loop yang menghitung mundur dari `5` ke `1`.
 3. Tulis `if` statement yang hanya mencetak pesan ketika sebuah list tidak kosong.
+4. Tulis nested condition yang memeriksa umur lebih dulu, lalu memeriksa apakah seseorang punya izin.
+5. Tulis contoh kecil `match` / `case` untuk pilihan menu seperti `"start"`, `"help"`, dan `"exit"`.
 
 ## Checklist Penguasaan
 
 - Saya bisa menjelaskan cara kerja `if`, `elif`, dan `else`.
+- Saya paham fungsi nested condition.
+- Saya tahu bahwa Python juga punya pencocokan gaya switch dengan `match` / `case`.
 - Saya paham perbedaan `for` dan `while`.
 - Saya tahu arti truthy dan falsy value.
 - Saya bisa memakai `break` dan `continue` dengan sengaja.

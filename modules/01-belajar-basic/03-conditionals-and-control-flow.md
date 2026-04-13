@@ -6,6 +6,7 @@ By the end of this lesson, you should understand:
 
 - how Python decides which code runs next
 - how conditionals create branching behavior
+- how nested conditions and switch-style matching fit into decision-making
 - how loops repeat work without copying code
 - what truthy and falsy values mean in real programs
 
@@ -63,6 +64,49 @@ else:
 Only one branch runs in this example.
 Python checks from top to bottom and stops at the first true condition.
 
+### Nested Conditions
+
+Sometimes one decision leads to another decision.
+
+That is where nested conditions appear:
+
+```python
+age = 20
+has_ticket = True
+
+if age >= 18:
+    if has_ticket:
+        print("Can enter")
+    else:
+        print("Must buy a ticket first")
+else:
+    print("Too young")
+```
+
+Nested `if` blocks are useful when one condition only matters after another condition has already passed.
+They should still be used carefully, because deeply nested logic becomes hard to read.
+
+### Switch-Style Matching in Python
+
+Many programming languages teach a `switch` statement for fixed choices.
+Traditional Python usually uses `if` / `elif` / `else`, but modern Python also supports `match` / `case`.
+
+Example:
+
+```python
+day = "monday"
+
+match day:
+    case "monday":
+        print("Start working")
+    case "sunday":
+        print("Rest day")
+    case _:
+        print("Regular day")
+```
+
+You do not need `match` to learn conditionals well, but it is useful to know that Python has a switch-like option for readable fixed-pattern branching.
+
 ### Truthy and Falsy Values
 
 In conditions, Python does not require a literal `True` or `False`.
@@ -81,6 +125,27 @@ Common falsy values:
 Most other values are truthy.
 
 This is useful, but you should still write conditions clearly so your intent is easy to understand.
+
+### Why Loops Exist
+
+Loops exist so you do not have to repeat the same code manually.
+
+Without loops:
+
+```python
+print("Hello")
+print("Hello")
+print("Hello")
+```
+
+With a loop:
+
+```python
+for _ in range(3):
+    print("Hello")
+```
+
+This is one of the first major ways programming saves effort and reduces duplication.
 
 ### `for` Loops
 
@@ -215,18 +280,24 @@ This mental model helps you reason about what path the program is taking at each
 
 1. What is the difference between `if`, `for`, and `while`?
 2. Why can an empty string be used as a falsy value in a condition?
-3. When is `break` useful, and when might it hide unclear loop design?
-4. Why should you be careful with `while True`?
+3. When is a nested condition useful, and when might it become too complex?
+4. What problem does `match` / `case` solve compared with long chains of fixed-value checks?
+5. When is `break` useful, and when might it hide unclear loop design?
+6. Why should you be careful with `while True`?
 
 ## Mini Exercises
 
 1. Write a program that prints `"even"` for even numbers and `"odd"` for odd numbers from `1` to `5`.
 2. Create a loop that counts down from `5` to `1`.
 3. Write an `if` statement that prints a message only when a list is not empty.
+4. Write a nested condition that checks age first, then checks whether a person has permission.
+5. Write a small `match` / `case` example for menu choices such as `"start"`, `"help"`, and `"exit"`.
 
 ## Mastery Checklist
 
 - I can explain how `if`, `elif`, and `else` work.
+- I understand what nested conditions are for.
+- I know that Python can also do switch-style matching with `match` / `case`.
 - I understand the difference between `for` and `while`.
 - I know what truthy and falsy values are.
 - I can use `break` and `continue` intentionally.

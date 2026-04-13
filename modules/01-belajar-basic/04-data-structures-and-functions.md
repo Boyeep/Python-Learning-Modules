@@ -6,6 +6,7 @@ By the end of this lesson, you should understand:
 
 - how the main Python data structures differ from each other
 - how to choose a structure based on the problem you are solving
+- how classic concepts like arrays, linked lists, stacks, and queues relate to Python
 - why functions are essential for readable, reusable code
 - how parameters, return values, and scope work together
 
@@ -28,6 +29,13 @@ The answers usually involve data structures and functions.
 
 ## Core Theory
 
+### Data Structures Help Organize Information
+
+Data structures are ways of storing and organizing values so your program can use them efficiently.
+
+When the amount of data grows, structure matters more.
+Without structure, code becomes difficult to maintain because you lose track of where information belongs and how it should be accessed.
+
 ### Lists
 
 Lists are ordered, mutable collections.
@@ -49,6 +57,22 @@ fruits.append("mango")
 fruits[0]
 len(fruits)
 ```
+
+### Arrays and Python Lists
+
+In many programming courses, arrays are introduced as fixed indexed collections.
+In beginner Python, `list` is usually the closest everyday equivalent.
+
+Example:
+
+```python
+numbers = [10, 20, 30]
+print(numbers[0])
+numbers.append(40)
+print(numbers)
+```
+
+So when older material talks about arrays, you can often map that idea to Python lists while remembering that Python lists are more flexible than many low-level arrays.
 
 ### Tuples
 
@@ -108,6 +132,65 @@ You choose it because its behavior matches your need.
 - use a `dict` for named lookup
 
 This is one of the most important decision-making habits in programming.
+
+### Linked Lists as a Concept
+
+A linked list is a data structure made of connected nodes.
+Each node stores data and a reference to the next node.
+
+You do not use linked lists directly in beginner Python nearly as often as lists or dictionaries, but the concept is important because it teaches that data can be connected instead of stored only by numeric index.
+
+Example:
+
+```python
+class Node:
+    def __init__(self, data, next_node=None):
+        self.data = data
+        self.next = next_node
+
+node3 = Node(30)
+node2 = Node(20, node3)
+node1 = Node(10, node2)
+
+print(node1.data)
+print(node1.next.data)
+```
+
+The most important idea is not memorizing the code.
+It is understanding that each node points to another node, forming a chain.
+
+### Stacks and Queues
+
+Two classic data-structure behaviors are:
+
+- stack -> LIFO, or Last In First Out
+- queue -> FIFO, or First In First Out
+
+Stack example:
+
+```python
+stack = []
+stack.append("A")
+stack.append("B")
+stack.append("C")
+
+print(stack.pop())  # C
+print(stack.pop())  # B
+```
+
+Queue example:
+
+```python
+from collections import deque
+
+queue = deque(["A", "B"])
+queue.append("C")
+
+print(queue.popleft())  # A
+print(queue.popleft())  # B
+```
+
+These ideas appear in task handling, undo systems, scheduling, and many other areas.
 
 ### Functions Package Behavior
 
@@ -211,18 +294,25 @@ If variables are individual boxes, data structures are shelves of boxes, and fun
 
 1. When would a dictionary be a better choice than a list?
 2. Why might a tuple be safer than a list in some situations?
-3. What is the difference between a parameter and an argument?
-4. Why is returning a value different from printing it?
+3. How is a Python list similar to the array idea taught in many languages?
+4. What is the core idea behind a linked list?
+5. What is the difference between a stack and a queue?
+6. What is the difference between a parameter and an argument?
+7. Why is returning a value different from printing it?
 
 ## Mini Exercises
 
 1. Create a dictionary representing a book with a title, author, and year.
 2. Write a function that receives a list of numbers and returns the largest one.
 3. Create a set from a list with repeated values and inspect the result.
+4. Build a simple stack with a Python list and remove two items from it.
+5. Build a simple queue with `collections.deque` and remove two items from it.
 
 ## Mastery Checklist
 
 - I can describe lists, tuples, sets, and dictionaries in practical terms.
+- I understand how array-style thinking maps to Python lists.
+- I know the basic ideas behind linked lists, stacks, and queues.
 - I can choose a data structure based on the kind of access I need.
 - I understand why functions reduce repetition and improve clarity.
 - I know what parameters and return values do.

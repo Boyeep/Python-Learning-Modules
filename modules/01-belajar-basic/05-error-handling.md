@@ -5,6 +5,8 @@
 By the end of this lesson, you should understand:
 
 - what exceptions are and how they differ from syntax errors
+- how syntax errors, runtime errors, and logical errors differ
+- why debugging and input validation matter
 - how `try`, `except`, `else`, and `finally` work together
 - why error handling should be specific and intentional
 - when it makes sense to raise your own exceptions
@@ -35,6 +37,16 @@ Error handling is about balance.
 
 ## Core Theory
 
+### Types of Errors
+
+Programming errors are often grouped into three broad categories:
+
+- syntax errors
+- runtime errors
+- logical errors
+
+Each one behaves differently.
+
 ### Syntax Errors vs Exceptions
 
 A syntax error means Python cannot understand the code structure itself.
@@ -48,6 +60,23 @@ For example:
 
 This distinction matters because exceptions can often be handled in code, while syntax errors must be fixed in the source.
 
+### Logical Errors
+
+A logical error happens when the program runs, but the result is wrong because the reasoning in the code is wrong.
+
+Example:
+
+```python
+age = 18
+
+if age > 18:
+    print("Adult")
+```
+
+This code runs, but it gives the wrong result for age `18` if your real rule was "18 or older."
+
+Logical errors are often harder to spot because the program does not always crash.
+
 ### Common Exceptions
 
 Some exceptions beginners see often:
@@ -60,6 +89,29 @@ Some exceptions beginners see often:
 - `IndexError`
 
 Learning to recognize these names helps you understand what the program is complaining about.
+
+### Debugging
+
+Debugging is the process of finding and fixing problems.
+
+It often involves:
+
+- reading the error message carefully
+- checking what values variables currently hold
+- testing assumptions step by step
+- reducing the problem to a smaller example
+
+One simple beginner debugging pattern is printing intermediate values:
+
+```python
+number = 5
+result = number * 2
+
+print("number =", number)
+print("result =", result)
+```
+
+Even simple inspection like this can quickly show whether the program is working the way you think it is.
 
 ### Basic `try` and `except`
 
@@ -117,6 +169,25 @@ except Exception:
 ```
 
 The broader version may hide bugs unrelated to the input conversion itself.
+
+### Input Validation
+
+Not every problem should wait until an exception happens.
+Sometimes it is better to validate input first.
+
+Example:
+
+```python
+age_text = input("Enter age: ")
+
+if age_text.isdigit():
+    age = int(age_text)
+    print("Valid age:", age)
+else:
+    print("Input must be numeric")
+```
+
+Input validation helps programs stay safe and predictable, especially when working with user input.
 
 ### Raising Exceptions
 
@@ -192,21 +263,27 @@ Error handling is your chance to decide what happens next:
 
 ## Practice Prompts
 
-1. Why is `except ValueError` often better than `except Exception`?
-2. What is the role of `finally`, even when nothing fails?
-3. When should your own code raise an exception instead of quietly continuing?
-4. What is the difference between a syntax error and an exception?
+1. What is the difference between a syntax error, a runtime error, and a logical error?
+2. Why is `except ValueError` often better than `except Exception`?
+3. What is the role of `finally`, even when nothing fails?
+4. When should your own code raise an exception instead of quietly continuing?
+5. Why is input validation useful even before exception handling starts?
+6. Why can logical errors be harder to notice than runtime errors?
 
 ## Mini Exercises
 
 1. Write code that catches a `ZeroDivisionError`.
 2. Write a function that raises `ValueError` when given a negative price.
 3. Create a small script that asks for an integer and prints a helpful message if the input is invalid.
+4. Write a tiny example of a logical error, then fix it.
+5. Add a print-based debugging step to a small calculation snippet.
 
 ## Mastery Checklist
 
 - I understand what an exception is.
 - I can explain the difference between syntax errors and runtime exceptions.
+- I can explain the difference between syntax errors, runtime errors, and logical errors.
+- I understand why debugging and input validation are part of basic programming practice.
 - I can read and write a basic `try`/`except` block.
 - I know why overly broad exception handling can be dangerous.
 - I understand that raising exceptions can protect program correctness.

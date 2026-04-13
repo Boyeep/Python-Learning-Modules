@@ -7,6 +7,7 @@ By the end of this lesson, you should understand:
 - how operators turn values into new values
 - how Python evaluates expressions and comparisons
 - how strings can be combined, cleaned, and reformatted
+- how to measure and access parts of a string directly
 - why text processing shows up in almost every real program
 
 ## Big Idea
@@ -113,6 +114,28 @@ full_name = first_name + " " + last_name
 
 Because strings are ordered, you can inspect specific characters and slices of characters.
 
+### Concatenation, Length, and Character Access
+
+Three very common beginner string operations are:
+
+- concatenation
+- length checking
+- indexing
+
+Example:
+
+```python
+first_name = "Alya"
+last_name = "Putri"
+full_name = first_name + " " + last_name
+
+print(full_name)
+print(len(full_name))
+print(full_name[0])
+```
+
+These operations appear constantly in user interfaces, file names, validation, and formatted output.
+
 ### Common String Operations
 
 String methods help you normalize or transform text.
@@ -197,6 +220,20 @@ This small example uses several ideas together:
 
 That is a realistic pattern: text comes in messy, and operators plus string methods make it usable.
 
+Another tiny example shows how several string tools combine:
+
+```python
+text = "Python"
+
+print(text + " Basics")
+print(len(text))
+print(text[0])
+print(text[-1])
+```
+
+This is a good reminder that strings are not just passive text.
+They are values you can inspect and transform deliberately.
+
 ## Rules of Thumb
 
 - use `==` for comparison and `=` for assignment
@@ -243,11 +280,13 @@ If you keep asking "what value does this expression produce?" your reasoning abo
 1. Write an expression that checks whether a number is between `10` and `20`.
 2. Create a string and print its first, last, and first three characters.
 3. Take the text `"  hello world  "` and transform it into `"Hello World"`.
+4. Create two strings, combine them into a full sentence, and print the sentence length.
 
 ## Mastery Checklist
 
 - I can explain arithmetic, comparison, and logical operators.
 - I understand that expressions evaluate to values.
 - I can manipulate strings with common methods.
+- I can use concatenation, indexing, slicing, and `len()` with strings.
 - I know how to format output with f-strings.
 - I understand that strings are ordered and immutable.

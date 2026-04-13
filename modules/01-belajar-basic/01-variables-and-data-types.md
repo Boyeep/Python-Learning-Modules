@@ -5,6 +5,7 @@
 By the end of this lesson, you should understand:
 
 - what a variable really represents in Python
+- how to choose clear and valid variable names
 - how built-in data types influence the operations you can perform
 - why type awareness prevents many beginner bugs
 - when to convert values from one type to another
@@ -49,6 +50,35 @@ This sounds simple, but it matters:
 - you work with names in your code
 - Python works with the values those names refer to
 
+### Variable Naming Rules
+
+Variable names should help a reader understand the role of the data.
+
+Basic rules:
+
+- a name cannot start with a number
+- a name cannot contain spaces
+- a name should not be a Python keyword
+- a descriptive name is usually better than a short vague name
+
+Examples:
+
+```python
+age = 18
+total_price = 99.5
+is_logged_in = True
+```
+
+Less helpful examples:
+
+```python
+x = 18
+data = 99.5
+value = True
+```
+
+These are not always wrong, but they often force the reader to guess what the variable means.
+
 ### Common Built-in Data Types
 
 You do not need to memorize every type at once.
@@ -67,6 +97,26 @@ Start with the ones you will use constantly:
 
 These types exist for a reason.
 Numbers are meant for calculation, strings are meant for text, booleans are meant for decisions, and `None` is often used to represent absence.
+
+### Primitive-Type Thinking Across Languages
+
+If you are coming from slide material or another language, you may hear categories such as:
+
+- integer
+- float or double
+- boolean
+- char
+- string
+
+Python maps those ideas in a slightly different way:
+
+- integer -> `int`
+- decimal number -> `float`
+- boolean -> `bool`
+- character -> usually a one-character `str`
+- string -> `str`
+
+So while some languages separate `char` and `string`, Python usually treats both as strings of different lengths.
 
 ### Assignment Can Change What a Name Refers To
 
@@ -171,6 +221,7 @@ Because the types are appropriate, the code reads naturally.
 - do not assume user input is numeric until you convert it
 - treat `"5"` and `5` as completely different values
 - use `None` only when the absence of a value is meaningful
+- prefer `snake_case` for normal variable names in Python
 
 ## Useful Built-ins
 
@@ -209,17 +260,20 @@ You are telling the name to point at a different value.
 1. Explain the difference between `int`, `float`, `str`, and `bool` in your own words.
 2. Why is `"25"` different from `25`, even though they look similar?
 3. Why does Python's dynamic typing feel convenient at first but require more attention later?
-4. Give an example of a real program variable that should probably start as `None`.
+4. What makes a variable name clear and descriptive?
+5. Give an example of a real program variable that should probably start as `None`.
 
 ## Mini Exercises
 
 1. Create variables for a person's name, age, height, and membership status.
 2. Convert the string `"42"` into an integer, then add `8` to it.
 3. Write a short snippet that prints the type of three different values.
+4. Rename three vague variables into clearer Python-style names.
 
 ## Mastery Checklist
 
 - I can explain that variables are names bound to values.
+- I know the basic rules for naming variables clearly.
 - I can identify the most common built-in Python data types.
 - I understand why type affects valid operations.
 - I know when to use explicit type conversion.

@@ -5,6 +5,7 @@
 Di akhir lesson ini, kamu diharapkan memahami:
 
 - apa yang sebenarnya direpresentasikan oleh variabel di Python
+- bagaimana memilih nama variabel yang jelas dan valid
 - bagaimana tipe data bawaan memengaruhi operasi yang bisa dilakukan
 - kenapa kesadaran terhadap tipe mencegah banyak bug dasar
 - kapan value perlu dikonversi ke tipe lain
@@ -49,6 +50,35 @@ Ini terlihat sederhana, tetapi penting:
 - kamu menulis nama variabel di code
 - Python bekerja terhadap value yang dirujuk oleh nama itu
 
+### Aturan Penamaan Variabel
+
+Nama variabel sebaiknya membantu pembaca memahami peran data yang disimpan.
+
+Aturan dasar:
+
+- nama tidak boleh diawali angka
+- nama tidak boleh mengandung spasi
+- nama sebaiknya bukan keyword Python
+- nama yang deskriptif biasanya lebih baik daripada nama yang samar
+
+Contoh:
+
+```python
+age = 18
+total_price = 99.5
+is_logged_in = True
+```
+
+Contoh yang kurang membantu:
+
+```python
+x = 18
+data = 99.5
+value = True
+```
+
+Contoh itu tidak selalu salah, tetapi sering membuat pembaca harus menebak arti variabelnya.
+
 ### Tipe Data Bawaan yang Umum
 
 Kamu tidak perlu menghafal semua tipe sekaligus.
@@ -67,6 +97,26 @@ Mulailah dari tipe yang paling sering dipakai:
 
 Setiap tipe ada karena punya peran berbeda.
 Angka dipakai untuk perhitungan, string untuk teks, boolean untuk keputusan, dan `None` sering dipakai untuk mewakili ketiadaan.
+
+### Cara Berpikir "Primitive Type" di Berbagai Bahasa
+
+Kalau kamu datang dari slide atau bahasa lain, kamu mungkin sering mendengar kategori seperti:
+
+- integer
+- float atau double
+- boolean
+- char
+- string
+
+Di Python, ide itu dipetakan sedikit berbeda:
+
+- integer -> `int`
+- angka desimal -> `float`
+- boolean -> `bool`
+- karakter tunggal -> biasanya `str` dengan panjang satu
+- string -> `str`
+
+Jadi walaupun beberapa bahasa memisahkan `char` dan `string`, Python biasanya menganggap keduanya sebagai string dengan panjang berbeda.
 
 ### Assignment Bisa Mengubah Rujukan Nama
 
@@ -171,6 +221,7 @@ Karena tipenya sesuai, code terasa alami untuk dibaca.
 - jangan anggap input user pasti numerik sebelum dikonversi
 - perlakukan `"5"` dan `5` sebagai value yang benar-benar berbeda
 - gunakan `None` hanya ketika ketiadaan value memang bermakna
+- gunakan `snake_case` untuk penamaan variabel biasa di Python
 
 ## Built-in yang Berguna
 
@@ -209,17 +260,20 @@ Kamu hanya menyuruh nama itu menunjuk ke value lain.
 1. Jelaskan perbedaan `int`, `float`, `str`, dan `bool` dengan kata-katamu sendiri.
 2. Kenapa `"25"` berbeda dari `25`, walaupun terlihat mirip?
 3. Kenapa dynamic typing terasa nyaman di awal tetapi menuntut perhatian lebih saat program membesar?
-4. Beri contoh variabel pada program nyata yang mungkin sebaiknya diawali dengan `None`.
+4. Apa yang membuat nama variabel terasa jelas dan deskriptif?
+5. Beri contoh variabel pada program nyata yang mungkin sebaiknya diawali dengan `None`.
 
 ## Mini Exercise
 
 1. Buat variabel untuk nama seseorang, umur, tinggi badan, dan status keanggotaan.
 2. Ubah string `"42"` menjadi integer, lalu tambahkan `8`.
 3. Tulis snippet singkat yang mencetak tipe dari tiga value berbeda.
+4. Ganti tiga nama variabel yang samar menjadi nama Python yang lebih jelas.
 
 ## Checklist Penguasaan
 
 - Saya bisa menjelaskan bahwa variabel adalah nama yang terikat ke value.
+- Saya tahu aturan dasar penamaan variabel yang jelas.
 - Saya bisa menyebutkan tipe data Python yang paling umum.
 - Saya paham kenapa tipe memengaruhi operasi yang valid.
 - Saya tahu kapan perlu melakukan konversi tipe secara eksplisit.
