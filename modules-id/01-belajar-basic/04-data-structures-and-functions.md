@@ -4,128 +4,226 @@
 
 Di akhir lesson ini, kamu diharapkan memahami:
 
-- kenapa data structure itu ada
-- fungsi dari list, tuple, set, dan dictionary
-- apa itu function
-- kenapa function sangat penting untuk code yang mudah dibaca
+- bagaimana data structure utama di Python berbeda satu sama lain
+- bagaimana memilih structure berdasarkan masalah yang sedang dihadapi
+- kenapa function penting untuk code yang reusable dan mudah dibaca
+- bagaimana parameter, return value, dan scope saling berhubungan
 
 ## Ide Besar
 
-Data structure mengorganisasi informasi.
-Function mengorganisasi perilaku.
+Program menjadi lebih kuat ketika bisa mengorganisasi kumpulan value dan membungkus perilaku yang berulang.
 
-Keduanya membuat program bisa berkembang lebih jauh dari sekadar beberapa baris code.
+Data structure membantu kamu membentuk informasi.
+Function membantu kamu membentuk logika.
+
+## Kenapa Ini Penting
+
+Begitu program tumbuh lebih dari beberapa baris, kamu akan mulai bertanya:
+
+- kumpulan data ini sebaiknya disimpan dalam bentuk apa?
+- bagaimana caranya agar logika yang sama tidak ditulis berulang-ulang?
+- bagaimana satu bagian program menerima data tanpa harus tahu semua detail bagian lain?
+
+Jawaban untuk pertanyaan-pertanyaan itu biasanya melibatkan data structure dan function.
 
 ## Teori Inti
 
 ### List
 
-List menyimpan kumpulan data yang terurut dan bisa diubah.
+List adalah koleksi yang terurut dan bisa diubah.
 
 ```python
-numbers = [1, 2, 3]
-numbers.append(4)
+fruits = ["apple", "banana", "cherry"]
 ```
 
-Gunakan list ketika:
+List cocok ketika:
 
 - urutan penting
+- item bisa ditambah atau dihapus
 - duplikasi diperbolehkan
-- value bisa berubah
+
+Operasi list yang umum:
+
+```python
+fruits.append("mango")
+fruits[0]
+len(fruits)
+```
 
 ### Tuple
 
-Tuple terurut tetapi tidak bisa diubah.
+Tuple adalah koleksi yang terurut tetapi immutable.
 
 ```python
-point = (10, 20)
+coordinates = (10, 20)
 ```
 
-Gunakan tuple ketika value seharusnya tetap.
+Tuple berguna saat beberapa value memang satu paket dan sebaiknya tidak diubah sembarangan.
+
+Contohnya:
+
+- koordinat
+- nilai RGB
+- hasil function yang mengembalikan beberapa value terkait
 
 ### Set
 
 Set menyimpan value yang unik.
 
 ```python
-tags = {"python", "backend", "python"}
+tags = {"python", "beginner", "tutorial"}
 ```
 
-Hasilnya menjadi:
+Set sangat berguna ketika:
 
-```python
-{"python", "backend"}
-```
-
-Gunakan set ketika keunikan value penting.
+- duplikasi perlu dihilangkan
+- pengecekan membership penting
+- urutan bukan fokus utama
 
 ### Dictionary
 
 Dictionary menyimpan pasangan key-value.
 
 ```python
-student = {
-    "name": "Alya",
-    "age": 21,
-    "major": "Computer Science",
-}
+user = {"name": "Alya", "age": 21}
 ```
 
-Gunakan dictionary ketika kamu ingin data yang memiliki label.
+Gunakan dictionary ketika value perlu diakses berdasarkan label yang bermakna, bukan berdasarkan posisi angka.
 
-### Function
+Karena itu dictionary cocok untuk:
 
-Function adalah blok code yang bisa dipakai ulang dan punya tujuan yang jelas.
+- data user
+- konfigurasi
+- counter
+- data terstruktur seperti hasil API
+
+### Memilih Structure yang Tepat
+
+Kamu tidak memilih structure hanya karena structure itu ada.
+Kamu memilihnya karena perilakunya cocok dengan kebutuhanmu.
+
+- pakai `list` untuk koleksi terurut
+- pakai `tuple` untuk kelompok value yang relatif tetap
+- pakai `set` untuk keunikan
+- pakai `dict` untuk lookup berdasarkan nama
+
+Kebiasaan memilih structure berdasarkan kebutuhan adalah salah satu skill penting dalam programming.
+
+### Function Mengemas Perilaku
+
+Function memungkinkan kamu memberi nama pada blok logika yang bisa dipakai ulang.
 
 ```python
 def greet(name):
-    return f"Hello, {name}"
+    print(f"Hello, {name}")
 ```
 
-Kenapa function penting:
+Daripada menulis ulang code yang sama berkali-kali, kamu cukup memanggil function ketika membutuhkannya.
 
-- mengurangi pengulangan
-- meningkatkan keterbacaan
-- memisahkan tanggung jawab
-- memudahkan testing
+Ini meningkatkan:
+
+- keterbacaan
+- reuse
+- testing
+- maintainability
 
 ### Parameter dan Return Value
 
-- parameter adalah input
-- return value adalah output
+Parameter membawa data masuk ke dalam function.
+Return value membawa hasil keluar dari function.
 
 ```python
 def add(a, b):
     return a + b
 ```
 
+Ini penting karena function yang baik biasanya menerima input, mengerjakan satu tugas yang fokus, lalu menghasilkan output yang jelas.
+
+`print()` dan `return` tidak sama:
+
+- `print()` menampilkan sesuatu ke user
+- `return` memberikan value kembali ke pemanggil function
+
 ### Scope
 
-Variabel yang dibuat di dalam function biasanya hanya berlaku di dalam function itu.
+Scope menjelaskan di mana sebuah variabel bisa diakses.
 
-Ini penting karena membantu mencegah gangguan yang tidak disengaja antara bagian program yang berbeda.
+```python
+def example():
+    message = "hello"
+    print(message)
+```
+
+`message` hanya ada di dalam function itu, kecuali dikembalikan atau disimpan di tempat lain.
+
+Ini membantu menjaga detail sementara tetap lokal, bukan bocor ke seluruh program.
+
+## Walkthrough Singkat
+
+Bayangkan ada program data siswa kecil:
+
+```python
+student = {
+    "name": "Alya",
+    "scores": [80, 90, 85],
+}
+
+def average(scores):
+    return sum(scores) / len(scores)
+
+result = average(student["scores"])
+print(f"{student['name']} has an average of {result}")
+```
+
+Contoh ini menggunakan:
+
+- dictionary untuk data siswa yang berlabel
+- list untuk banyak nilai
+- function untuk perhitungan yang reusable
+- return value agar hasilnya bisa dipakai di tempat lain
+
+Contoh kecil ini cukup realistis untuk menunjukkan bagaimana konsep-konsep ini saling bekerja sama.
+
+## Aturan Praktis
+
+- pilih data structure berdasarkan perilakunya, bukan karena kebiasaan
+- buat function tetap fokus pada satu tugas yang jelas
+- lebih baik return value daripada print di utility function
+- gunakan nama parameter yang deskriptif
+- hindari ketergantungan pada variabel global jika parameter function sudah cukup
 
 ## Mental Model
 
-Gunakan data structure untuk memodelkan bentuk informasi.
-Gunakan function untuk memodelkan tugas yang dilakukan program.
+Data structure mengorganisasi apa yang diketahui programmu.
+Function mengorganisasi apa yang dilakukan programmu.
+
+Kalau variabel adalah kotak-kotak individual, data structure adalah rak dari banyak kotak, dan function adalah alat yang diberi label untuk bekerja dengan kotak-kotak itu.
 
 ## Kesalahan yang Sering Terjadi
 
-- memakai data structure yang kurang tepat
-- membuat function yang melakukan terlalu banyak hal
+- memakai list padahal dictionary akan membuat data lebih jelas
+- memakai set padahal urutan sebenarnya penting
+- membuat function yang mengerjakan terlalu banyak hal sekaligus
 - lupa mengembalikan value
-- terlalu bergantung pada variabel global
+- mengira variabel yang dibuat di dalam function bisa dipakai di mana-mana
 
 ## Prompt Latihan
 
 1. Kapan dictionary lebih tepat daripada list?
-2. Kenapa kamu mungkin memilih set dibanding list?
-3. Apa perbedaan parameter dan return value?
+2. Kenapa tuple bisa lebih aman daripada list dalam beberapa situasi?
+3. Apa perbedaan parameter dan argument?
+4. Kenapa return value berbeda dari sekadar print?
+
+## Mini Exercise
+
+1. Buat dictionary yang merepresentasikan sebuah buku dengan judul, penulis, dan tahun terbit.
+2. Tulis function yang menerima list angka dan mengembalikan angka terbesar.
+3. Buat set dari list yang berisi value berulang lalu periksa hasilnya.
 
 ## Checklist Penguasaan
 
-- Saya bisa menjelaskan data structure bawaan Python yang umum.
-- Saya bisa memilih structure dasar sesuai masalahnya.
-- Saya paham function dipakai untuk apa.
-- Saya bisa membaca signature function sederhana dan menjelaskan input serta output-nya.
+- Saya bisa menjelaskan list, tuple, set, dan dictionary secara praktis.
+- Saya bisa memilih data structure berdasarkan cara akses yang dibutuhkan.
+- Saya paham kenapa function mengurangi pengulangan dan memperjelas code.
+- Saya tahu fungsi parameter dan return value.
+- Saya paham ide dasar local scope.

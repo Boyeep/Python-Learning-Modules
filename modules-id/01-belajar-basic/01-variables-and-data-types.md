@@ -4,27 +4,36 @@
 
 Di akhir lesson ini, kamu diharapkan memahami:
 
-- apa itu variabel
-- apa itu tipe data
-- kenapa tipe data penting dalam programming
-- bagaimana Python menangani tipe data bawaan yang umum
+- apa yang sebenarnya direpresentasikan oleh variabel di Python
+- bagaimana tipe data bawaan memengaruhi operasi yang bisa dilakukan
+- kenapa kesadaran terhadap tipe mencegah banyak bug dasar
+- kapan value perlu dikonversi ke tipe lain
 
 ## Ide Besar
 
-Variabel adalah nama yang merujuk ke sebuah value.
+Programming pada dasarnya bekerja dengan value.
 
-Tipe data menjelaskan value itu termasuk jenis apa dan operasi apa yang masuk akal untuk value tersebut.
+Variabel memberi nama pada value tersebut, dan tipe data memberi tahu Python bagaimana value itu seharusnya diperlakukan.
+
+Kalau kamu paham jenis data yang sedang dipegang, banyak keputusan dalam programming akan terasa jauh lebih masuk akal.
 
 ## Kenapa Ini Penting
 
-Programming pada dasarnya adalah memindahkan dan mengubah data.
-Kalau kamu tidak paham bentuk data yang sedang kamu pegang, code akan cepat terasa membingungkan.
+Hampir semua program Python menerima data, mengubah data, lalu menghasilkan sesuatu.
+
+Itu berarti kamu terus-menerus perlu menjawab pertanyaan seperti:
+
+- apakah ini teks atau angka?
+- apakah dua value ini bisa dibandingkan langsung?
+- apakah ini hasil akhir, atau hanya placeholder sementara?
+
+Banyak kebingungan pemula muncul karena kehilangan jejak jawaban dari pertanyaan-pertanyaan itu.
 
 ## Teori Inti
 
-### Variabel
+### Variabel Mengikat Nama ke Value
 
-Variabel memungkinkan kamu menyimpan value agar bisa dipakai lagi nanti.
+Variabel adalah nama yang menunjuk ke sebuah value.
 
 ```python
 name = "Alya"
@@ -32,80 +41,186 @@ age = 21
 is_student = True
 ```
 
-Di Python, kamu tidak perlu mendeklarasikan tipenya terlebih dahulu.
-Python akan mengenali tipenya dari value yang kamu berikan.
+Di sini, `name`, `age`, dan `is_student` adalah label.
+Value yang sebenarnya adalah `"Alya"`, `21`, dan `True`.
+
+Ini terlihat sederhana, tetapi penting:
+
+- kamu menulis nama variabel di code
+- Python bekerja terhadap value yang dirujuk oleh nama itu
 
 ### Tipe Data Bawaan yang Umum
 
+Kamu tidak perlu menghafal semua tipe sekaligus.
+Mulailah dari tipe yang paling sering dipakai:
+
 - `int`
-  Bilangan bulat seperti `1`, `25`, `-10`
+  Bilangan bulat seperti `1`, `25`, dan `-10`
 - `float`
-  Bilangan desimal seperti `3.14`, `0.5`
+  Bilangan desimal seperti `3.14` dan `0.5`
 - `str`
-  Teks seperti `"hello"`
+  Value teks seperti `"hello"` atau `"123"`
 - `bool`
-  `True` atau `False`
+  Value logika: `True` atau `False`
 - `NoneType`
-  Direpresentasikan dengan `None`, artinya tidak ada value bermakna
+  Tipe dari `None`, yang biasanya berarti "belum ada value" atau "tidak ada sesuatu yang bermakna di sini"
+
+Setiap tipe ada karena punya peran berbeda.
+Angka dipakai untuk perhitungan, string untuk teks, boolean untuk keputusan, dan `None` sering dipakai untuk mewakili ketiadaan.
+
+### Assignment Bisa Mengubah Rujukan Nama
+
+Assignment di Python tidak membuat variabel terkunci selamanya.
+
+```python
+score = 80
+score = 95
+```
+
+Setelah baris kedua, `score` merujuk ke `95`, bukan lagi `80`.
+
+Ini berguna karena program memang sering memperbarui state.
+Tetapi ini juga berarti kamu perlu memberi nama variabel dengan hati-hati agar maknanya tetap jelas.
 
 ### Dynamic Typing
 
 Python bersifat dynamically typed.
-Artinya, satu nama variabel bisa saja nanti merujuk ke value dengan tipe yang berbeda.
+Kamu tidak perlu mendeklarasikan tipe secara terpisah sebelum memberi value.
 
 ```python
 value = 10
 value = "ten"
 ```
 
-Ini fleksibel, tetapi juga menuntut kamu untuk lebih disiplin secara mental.
+Satu nama bisa merujuk ke tipe yang berbeda di waktu yang berbeda.
 
-### Kesadaran terhadap Tipe
+Fleksibilitas ini kuat, tetapi menuntut kamu untuk sadar terhadap tipe value saat ini, bukan hanya mengingat tipe yang pernah dipakai beberapa baris sebelumnya.
 
-Tipe data yang berbeda mendukung operasi yang berbeda juga.
+### Kesadaran Tipe dalam Expression Nyata
+
+Tipe data yang berbeda mendukung operasi yang berbeda.
 
 ```python
-count = 10
-price = 19.99
+count = 3
 title = "Python"
+price = 19.99
 ```
 
-- angka bisa ditambah dan dikalikan
-- string bisa digabung dan di-slice
-- boolean dipakai dalam kondisi
+- angka bisa dijumlahkan, dikurangi, dikalikan, dan dibandingkan
+- string bisa digabung, di-slice, dan diubah dengan method string
+- boolean sering dipakai di `if` statement dan loop
+
+Kesalahan tipe sering terlihat seperti ini:
+
+```python
+"5" + "2"   # hasilnya "52"
+5 + 2       # hasilnya 7
+```
+
+Kedua baris valid, tetapi maknanya sangat berbeda.
+
+### Konversi Tipe
+
+Kadang kamu perlu mengubah tipe secara eksplisit.
+
+Ini sangat umum saat menerima input dari user:
+
+```python
+age_text = input("Masukkan umurmu: ")
+age_number = int(age_text)
+```
+
+`input()` selalu menghasilkan string.
+Kalau kamu ingin melakukan perhitungan, biasanya kamu perlu memakai `int()` atau `float()`.
+
+Fungsi konversi yang umum:
+
+- `int()`
+- `float()`
+- `str()`
+- `bool()`
+
+Tetapi hati-hati: tidak semua value bisa dikonversi dengan masuk akal.
+
+## Walkthrough Singkat
+
+Bayangkan kamu sedang menulis script checkout sederhana:
+
+```python
+item_name = "Notebook"
+quantity = 3
+unit_price = 4.5
+is_discounted = True
+
+total = quantity * unit_price
+print(f"{item_name}: {total}")
+```
+
+Setiap variabel punya peran yang jelas:
+
+- `item_name` adalah teks
+- `quantity` adalah bilangan bulat
+- `unit_price` adalah angka desimal
+- `is_discounted` adalah value ya/tidak
+
+Karena tipenya sesuai, code terasa alami untuk dibaca.
+
+## Aturan Praktis
+
+- gunakan nama yang menjelaskan peran value, bukan hanya tipenya
+- jangan anggap input user pasti numerik sebelum dikonversi
+- perlakukan `"5"` dan `5` sebagai value yang benar-benar berbeda
+- gunakan `None` hanya ketika ketiadaan value memang bermakna
 
 ## Built-in yang Berguna
 
+Built-in berikut membantu kamu memeriksa atau mengonversi value:
+
 ```python
 type("hello")
-type(42)
-type(True)
+isinstance(42, int)
+float("3.14")
+str(99)
 ```
 
-Gunakan `type()` untuk melihat jenis value yang sedang kamu pakai.
+`type()` menunjukkan tipe tepatnya.
+`isinstance()` sering lebih berguna saat kamu ingin memeriksa apakah sebuah value termasuk jenis tertentu.
 
 ## Mental Model
 
-Bayangkan variabel sebagai label dan value sebagai objek yang sebenarnya.
+Bayangkan variabel sebagai sticky note yang ditempel pada value.
 
-Nama variabel bukan datanya.
-Nama variabel hanyalah pegangan untuk mengakses data itu.
+Sticky note itu adalah nama variabel.
+Objek yang ditempeli adalah value sebenarnya.
+
+Ketika kamu menulis assignment baru, kamu tidak mengubah nama variabelnya.
+Kamu hanya menyuruh nama itu menunjuk ke value lain.
 
 ## Kesalahan yang Sering Terjadi
 
-- memperlakukan angka dan string seolah-olah sama
-- lupa bahwa `"5"` berbeda dengan `5`
-- mengira `None` sama dengan string kosong atau angka nol
+- mengira angka yang tercetak pasti disimpan sebagai tipe angka
+- lupa bahwa `input()` selalu menghasilkan string
+- mencampur teks dan angka tanpa konversi
+- memakai nama variabel terlalu samar seperti `data` atau `value`
+- menganggap `None`, `0`, dan `""` punya arti yang sama
 
 ## Prompt Latihan
 
-1. Jelaskan perbedaan `int`, `float`, dan `str`.
-2. Apa tipe dari `False`?
-3. Kenapa dynamic typing bisa membantu sekaligus berisiko?
+1. Jelaskan perbedaan `int`, `float`, `str`, dan `bool` dengan kata-katamu sendiri.
+2. Kenapa `"25"` berbeda dari `25`, walaupun terlihat mirip?
+3. Kenapa dynamic typing terasa nyaman di awal tetapi menuntut perhatian lebih saat program membesar?
+4. Beri contoh variabel pada program nyata yang mungkin sebaiknya diawali dengan `None`.
+
+## Mini Exercise
+
+1. Buat variabel untuk nama seseorang, umur, tinggi badan, dan status keanggotaan.
+2. Ubah string `"42"` menjadi integer, lalu tambahkan `8`.
+3. Tulis snippet singkat yang mencetak tipe dari tiga value berbeda.
 
 ## Checklist Penguasaan
 
-- Saya bisa menjelaskan apa yang disimpan oleh variabel.
+- Saya bisa menjelaskan bahwa variabel adalah nama yang terikat ke value.
 - Saya bisa menyebutkan tipe data Python yang paling umum.
-- Saya bisa membedakan text dan numeric value.
-- Saya paham bahwa tipe data memengaruhi operasi yang valid.
+- Saya paham kenapa tipe memengaruhi operasi yang valid.
+- Saya tahu kapan perlu melakukan konversi tipe secara eksplisit.
+- Saya bisa mengenali kesalahan dasar yang melibatkan string, angka, dan `None`.

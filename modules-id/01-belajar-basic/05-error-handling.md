@@ -4,37 +4,66 @@
 
 Di akhir lesson ini, kamu diharapkan memahami:
 
-- kenapa error bisa terjadi
-- apa itu exception
-- bagaimana `try`, `except`, `else`, dan `finally` bekerja
-- kenapa error handling harus dilakukan dengan sengaja, bukan asal tangkap
+- apa itu exception dan bagaimana bedanya dengan syntax error
+- bagaimana `try`, `except`, `else`, dan `finally` bekerja bersama
+- kenapa error handling sebaiknya spesifik dan disengaja
+- kapan masuk akal untuk melempar exception sendiri
 
 ## Ide Besar
 
-Program tidak gagal hanya karena developer buruk.
-Program gagal karena dunia nyata memang tidak selalu bisa diprediksi:
+Error bukan gangguan aneh dari luar dunia programming.
+Error adalah bagian normal dari perilaku program.
 
-- user memasukkan input yang salah
-- file hilang
-- konversi gagal
-- network call timeout
+Developer yang baik tidak berpura-pura bahwa error tidak akan pernah terjadi.
+Mereka menentukan error mana yang bisa ditangani, mana yang perlu dilaporkan, dan mana yang harus menghentikan program.
 
-Error handling adalah cara agar program tetap merespons dengan aman.
+## Kenapa Ini Penting
+
+Program berinteraksi dengan banyak hal yang tidak selalu bisa diandalkan:
+
+- input user
+- file
+- respons network
+- library eksternal
+
+Semua hal itu bisa gagal.
+Kalau kamu tidak merencanakan kegagalan, program akan jadi rapuh dan membingungkan.
+
+Kalau kamu terlalu agresif menangkap semua error, kamu justru bisa menyembunyikan bug yang penting.
+
+Error handling adalah soal keseimbangan.
 
 ## Teori Inti
 
-### Exception
+### Syntax Error vs Exception
 
-Di Python, banyak runtime error direpresentasikan sebagai exception.
+Syntax error berarti Python tidak bisa memahami struktur code itu sendiri.
 
-Contoh:
+Exception berarti code-nya valid secara syntax, tetapi sesuatu berjalan salah saat dieksekusi.
+
+Contohnya:
+
+- lupa titik dua setelah `if` bisa menyebabkan syntax error
+- membagi dengan nol akan menimbulkan `ZeroDivisionError`
+
+Perbedaan ini penting karena exception sering bisa ditangani oleh code, sedangkan syntax error harus diperbaiki di source code.
+
+### Exception yang Umum
+
+Beberapa exception yang sering ditemui pemula:
 
 - `ValueError`
 - `TypeError`
-- `KeyError`
+- `ZeroDivisionError`
 - `FileNotFoundError`
+- `KeyError`
+- `IndexError`
 
-### Penanganan Dasar
+Mengenali nama-nama ini membantu kamu memahami apa yang sedang dikeluhkan program.
+
+### `try` dan `except` Dasar
+
+Gunakan `try` untuk menandai code yang berpotensi gagal, lalu `except` untuk menentukan responsnya.
 
 ```python
 try:
@@ -43,7 +72,14 @@ except ValueError:
     print("Itu bukan integer yang valid")
 ```
 
-### Struktur Lengkap
+Dengan pola ini, program bisa menangani masalah yang dapat diprediksi tanpa langsung crash.
+
+### `else` dan `finally`
+
+Python juga menyediakan dua bagian tambahan yang berguna:
+
+- `else` berjalan hanya jika tidak ada exception
+- `finally` berjalan baik exception terjadi maupun tidak
 
 ```python
 try:
@@ -51,71 +87,126 @@ try:
 except ZeroDivisionError:
     print("Tidak bisa membagi dengan nol")
 else:
-    print("Berhasil:", result)
+    print(result)
 finally:
-    print("Bagian ini selalu jalan")
+    print("Done")
 ```
 
-Artinya:
+Ini berguna ketika kamu ingin memisahkan dengan jelas logika gagal, logika sukses, dan logika cleanup.
 
-- `try`: code yang mungkin gagal
-- `except`: apa yang dilakukan kalau gagal
-- `else`: apa yang dilakukan kalau tidak ada exception
-- `finally`: cleanup yang harus selalu berjalan
+### Tangkap Exception yang Spesifik
 
-### Kenapa Tidak Boleh Menangkap Semua Error Sembarangan
+Menangkap exception yang spesifik biasanya lebih baik daripada menangkap semuanya.
 
-Ini praktik yang buruk:
+Lebih baik:
 
 ```python
 try:
-    do_something()
-except:
-    print("Error")
+    age = int(user_input)
+except ValueError:
+    print("Masukkan angka yang valid")
 ```
 
-Kenapa berisiko:
+Lebih berisiko:
 
-- menyembunyikan masalah sebenarnya
-- mempersulit debugging
-- bisa menangkap error yang sebenarnya tidak ingin kamu tangkap
+```python
+try:
+    age = int(user_input)
+except Exception:
+    print("Ada masalah")
+```
 
-Lebih baik tangkap tipe exception yang spesifik jika memungkinkan.
+Versi yang terlalu luas bisa menyembunyikan bug yang sebenarnya tidak ada hubungannya dengan konversi input.
 
 ### Melempar Exception Sendiri
 
-Kamu juga bisa membuat exception sendiri dengan `raise`.
+Code milikmu sendiri juga bisa melempar exception ketika ada kondisi yang tidak boleh dibiarkan.
 
 ```python
-def divide(a, b):
-    if b == 0:
-        raise ValueError("b tidak boleh nol")
-    return a / b
+def set_age(age):
+    if age < 0:
+        raise ValueError("Umur tidak boleh negatif")
 ```
 
-Ini berguna ketika function harus menegakkan aturan tertentu.
+Ini adalah cara untuk menjaga aturan program tetap konsisten.
+
+### Validasi dan Recovery
+
+Tidak semua error harus ditangani di tempat yang sama.
+
+Kadang kamu ingin:
+
+- memvalidasi lebih awal agar error tidak terjadi
+- menangkap error lalu menampilkan pesan yang ramah
+- membiarkan program gagal dengan jelas karena bug-nya memang harus diperbaiki
+
+Keputusan ini tergantung konteks.
+
+## Walkthrough Singkat
+
+Bayangkan ada program yang meminta angka:
+
+```python
+text = input("Masukkan angka: ")
+
+try:
+    number = int(text)
+except ValueError:
+    print("Input harus berupa digit")
+else:
+    print(number * 2)
+```
+
+Pola ini kuat untuk pemula karena:
+
+- baris yang berisiko kecil dan jelas
+- tipe exception yang ditangkap spesifik
+- jalur sukses tetap mudah dibaca
+
+## Aturan Praktis
+
+- buat blok `try` sekecil mungkin
+- tangkap exception yang paling spesifik yang kamu tahu
+- gunakan exception untuk situasi yang benar-benar exceptional, bukan untuk alur biasa
+- lempar exception ketika input yang salah akan merusak kebenaran program
+- jangan diamkan error kecuali kamu benar-benar tahu kenapa itu aman
 
 ## Mental Model
 
-Error handling bukan berarti berharap semuanya salah.
-Error handling berarti mendesain apa yang harus dilakukan program ketika hal buruk benar-benar terjadi.
+Exception adalah cara Python mengatakan, "Aku tidak bisa melanjutkan secara normal dengan asumsi yang sekarang."
+
+Error handling memberi kamu kesempatan untuk menentukan apa yang harus terjadi setelah itu:
+
+- memulihkan keadaan
+- membersihkan resource
+- memberi tahu user
+- menghentikan program dengan jelas
 
 ## Kesalahan yang Sering Terjadi
 
-- menangkap semua exception tanpa paham penyebabnya
-- mengabaikan pesan error
-- terlalu sering memakai exception untuk alur normal
-- lupa membersihkan resource
+- terlalu cepat memakai `except Exception`
+- menyembunyikan error dengan pesan umum dan kehilangan penyebab aslinya
+- menaruh terlalu banyak code di dalam blok `try`
+- mencampur validasi dengan error handling
+- memakai exception sebagai cara utama mengatur alur normal program
 
 ## Prompt Latihan
 
-1. Apa itu exception?
-2. Kenapa `except ValueError` biasanya lebih baik daripada `except` kosong?
-3. Apa tujuan dari `finally`?
+1. Kenapa `except ValueError` sering lebih baik daripada `except Exception`?
+2. Apa peran `finally`, bahkan saat tidak ada error?
+3. Kapan code milikmu sendiri sebaiknya melempar exception daripada diam-diam melanjutkan?
+4. Apa perbedaan syntax error dan exception?
+
+## Mini Exercise
+
+1. Tulis code yang menangkap `ZeroDivisionError`.
+2. Tulis function yang melempar `ValueError` jika menerima harga negatif.
+3. Buat script kecil yang meminta integer lalu menampilkan pesan yang membantu jika input tidak valid.
 
 ## Checklist Penguasaan
 
-- Saya paham apa itu exception di Python.
-- Saya bisa membaca blok `try`/`except` dan menjelaskan perilakunya.
+- Saya paham apa itu exception.
+- Saya bisa menjelaskan perbedaan syntax error dan runtime exception.
+- Saya bisa membaca dan menulis blok `try`/`except` dasar.
 - Saya tahu kenapa menangkap error terlalu luas bisa berbahaya.
-- Saya paham bahwa software yang baik merencanakan kemungkinan gagal.
+- Saya paham bahwa melempar exception bisa menjaga kebenaran program.
