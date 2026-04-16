@@ -1,0 +1,12 @@
+[project]
+name = "my_project"
+version = "0.1.0"
+description = "Contoh project Python sederhana"
+readme = "README.md"
+requires-python = ">=3.10"
+
+[project.dependencies]
+requests = "^2.31.0"
+
+[tool.black]
+line-length = 88
