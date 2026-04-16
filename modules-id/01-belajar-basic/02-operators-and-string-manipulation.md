@@ -7,7 +7,6 @@ Di akhir lesson ini, kamu diharapkan memahami:
 - bagaimana operator mengubah value menjadi value baru
 - bagaimana Python mengevaluasi expression dan perbandingan
 - bagaimana string bisa digabung, dibersihkan, dan diformat ulang
-- bagaimana mengukur panjang string dan mengambil bagiannya secara langsung
 - kenapa pengolahan teks muncul hampir di semua program nyata
 
 ## Ide Besar
@@ -114,28 +113,6 @@ full_name = first_name + " " + last_name
 
 Karena string terurut, kamu bisa mengambil karakter atau potongan karakter berdasarkan posisi.
 
-### Penggabungan, Panjang, dan Akses Karakter
-
-Tiga operasi string yang sangat umum untuk pemula adalah:
-
-- menggabungkan string
-- menghitung panjang string
-- mengambil karakter tertentu
-
-Contoh:
-
-```python
-first_name = "Alya"
-last_name = "Putri"
-full_name = first_name + " " + last_name
-
-print(full_name)
-print(len(full_name))
-print(full_name[0])
-```
-
-Operasi seperti ini sering muncul di tampilan UI, nama file, validasi, dan format output.
-
 ### Operasi String yang Umum
 
 Method string membantu kamu membersihkan atau mengubah teks.
@@ -220,20 +197,6 @@ Contoh kecil ini memakai beberapa ide sekaligus:
 
 Ini pola yang realistis: teks masuk dalam keadaan berantakan, lalu operator dan method string membuatnya usable.
 
-Contoh kecil lain juga menunjukkan bagaimana beberapa tool string saling bekerja sama:
-
-```python
-text = "Python"
-
-print(text + " Basics")
-print(len(text))
-print(text[0])
-print(text[-1])
-```
-
-Ini mengingatkan bahwa string bukan hanya teks pasif.
-String adalah value yang bisa diperiksa dan diubah dengan sengaja.
-
 ## Aturan Praktis
 
 - gunakan `==` untuk perbandingan dan `=` untuk assignment
@@ -280,13 +243,11 @@ Kalau kamu terbiasa bertanya "expression ini menghasilkan value apa?", kemampuan
 1. Tulis expression yang mengecek apakah sebuah angka berada di antara `10` dan `20`.
 2. Buat string lalu cetak karakter pertama, terakhir, dan tiga karakter pertamanya.
 3. Ubah teks `"  hello world  "` menjadi `"Hello World"`.
-4. Buat dua string, gabungkan menjadi satu kalimat penuh, lalu cetak panjang kalimat itu.
 
 ## Checklist Penguasaan
 
 - Saya bisa menjelaskan operator aritmetika, perbandingan, dan logika.
 - Saya paham bahwa expression menghasilkan value.
 - Saya bisa memanipulasi string dengan method umum.
-- Saya bisa memakai concatenation, indexing, slicing, dan `len()` pada string.
 - Saya tahu cara memformat output dengan f-string.
 - Saya paham bahwa string adalah sequence yang terurut dan immutable.
