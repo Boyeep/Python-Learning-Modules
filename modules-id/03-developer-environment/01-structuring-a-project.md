@@ -68,6 +68,84 @@ Ketika project tumbuh, kamu juga bisa melihat:
 - file konfigurasi
 - folder data atau aset
 
+### Contoh Struktur yang Lebih Lengkap
+
+Project yang lebih besar sering punya layout seperti ini:
+
+```text
+my_project/
+  src/
+    my_project/
+      __init__.py
+      cli.py
+      core.py
+  tests/
+    test_core.py
+  docs/
+  pyproject.toml
+  README.md
+  .gitignore
+```
+
+Struktur dengan `src/` membantu memastikan modul hanya diimpor ketika project diinstal atau dijalankan dari root yang benar.
+
+### Package vs Module
+
+Sebuah package Python adalah folder dengan `__init__.py`.
+Module adalah file Python tunggal.
+Dalam project yang terstruktur, kamu biasanya membuat package untuk logika utama dan module kecil untuk utilitas.
+
+### Kenapa `src/` Layout Bermanfaat
+
+`src/` layout mencegah import kode project secara tidak sengaja ketika sedang berada di direktori lain.
+Itu juga memisahkan source dari file konfigurasi dan dokumentasi.
+
+### Kapan Menggunakan `src/` Layout
+
+Layout ini sangat berguna ketika project bisa dijalankan di banyak cara atau dikonsumsi sebagai library.
+Jika kamu hanya membuat script sekali pakai, layout sederhana tanpa `src/` mungkin masih wajar.
+Tapi untuk project yang ingin diuji, didistribusikan, atau dikembangkan oleh tim, `src/` membantu membuat batas antara kode aplikasi dan artefak build.
+
+### Struktur Berdasarkan Tipe Project
+
+Struktur project juga bergantung pada tujuan utama:
+
+- Library: fokus pada `src/<package>/` dan `tests/`.
+- Aplikasi web: tambahkan `app/`, `templates/`, `static/`, dan `config/`.
+- Command-line tool: gunakan `src/<package>/cli.py` dengan entry point yang jelas.
+
+### Penamaan File dan Folder
+
+Penamaan yang jelas membantu orang lain langsung memahami tujuan file.
+Contoh nama yang baik:
+
+- `cli.py` untuk command-line interface
+- `config.py` untuk pengaturan
+- `models.py` untuk definisi data
+- `service.py` untuk logika bisnis
+
+Hindari nama samar seperti `stuff.py` atau `helper.py` jika fungsinya tidak jelas.
+
+### Contoh Nyata: Dari Script ke Package
+
+Bayangkan sebuah script kecil `weather.py` yang mengambil data dan menampilkan hasil.
+Kalau aplikasi tumbuh, lebih baik pecah menjadi:
+
+```text
+weather_app/
+  src/
+    weather_app/
+      __init__.py
+      cli.py
+      api.py
+      formatter.py
+  tests/
+    test_api.py
+    test_formatter.py
+```
+
+Dengan begitu, setiap bagian memiliki tanggung jawabnya sendiri dan test lebih mudah ditulis.
+
 ### Prinsip Pemisahan yang Umum
 
 Project yang sehat biasanya mengikuti beberapa prinsip:
@@ -121,6 +199,37 @@ Orang baru seharusnya bisa melihat:
 
 Nama file dan folder seharusnya membuat jawaban itu lebih mudah ditemukan.
 
+### Studi Kasus: Dari Script Menjadi Paket
+
+Bayangkan aplikasi awalnya hanya satu file `weather.py`.
+Seiring fitur bertambah, kamu bisa memecahnya menjadi:
+
+```text
+my_app/
+  src/
+    my_app/
+      __init__.py
+      cli.py
+      service.py
+      formatter.py
+  tests/
+    test_service.py
+    test_formatter.py
+``` 
+
+Struktur ini membuat setiap tanggung jawab lebih jelas dan memudahkan test otomatis.
+
+### Kapan Mengubah Struktur
+
+Struktur project bukan sesuatu yang harus berubah setiap saat.
+Ubah struktur ketika:
+
+- kode menjadi sulit dijelajahi
+- test sulit ditempatkan
+- komponen mulai memiliki tanggung jawab berbeda
+
+Lebih baik melakukan perubahan struktur secara terencana daripada karena merasa ingin coba-coba.
+
 ## Walkthrough Singkat
 
 Bayangkan ada aplikasi command-line kecil:
@@ -146,6 +255,30 @@ Kemungkinan tanggung jawabnya:
 - `tests/` memeriksa perilaku yang diharapkan
 
 Bahkan pemisahan sederhana seperti ini sudah membuat pertumbuhan project jauh lebih mudah.
+
+### Contoh Struktur `src/`
+
+```text
+my_project/
+  src/
+    my_project/
+      __init__.py
+      main.py
+      utils.py
+  tests/
+    test_utils.py
+  pyproject.toml
+  README.md
+```
+
+Contoh `main.py`:
+
+```python
+from my_project.utils import greet
+
+if __name__ == "__main__":
+    print(greet("World"))
+```
 
 ## Aturan Praktis
 
