@@ -1,0 +1,9 @@
+{
+  "name": "Python Dev Container",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+  "workspaceFolder": "/workspace",
+  "postCreateCommand": "python -m pip install --upgrade pip && pip install -r requirements.lock",
+  "settings": {
+    "python.pythonPath": "/usr/local/bin/python"
+  }
+}
