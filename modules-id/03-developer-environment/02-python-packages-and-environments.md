@@ -80,9 +80,117 @@ Alur yang umum:
 python -m venv .venv
 ```
 
+Aktifkan environment di Linux/macOS:
+
+```bash
+source .venv/bin/activate
+```
+
+Aktifkan environment di Windows PowerShell:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
 Setelah diaktifkan, package yang di-install akan tetap lokal untuk environment tersebut, bukan memengaruhi semua project Python di mesinmu.
 
 Karena itu, banyak project menyimpan folder `.venv` di root project.
+
+### Menyimpan Dependency dengan `pip freeze`
+
+Setelah meng-install package, kamu bisa mencatat versi yang terpasang:
+
+```bash
+pip install requests
+pip freeze > requirements.txt
+```
+
+Lalu orang lain bisa membuat environment yang sama dengan:
+
+```bash
+pip install -r requirements.txt
+```
+
+### Dependency Development vs Production
+
+Untuk banyak project, ada dependency yang hanya diperlukan saat pengembangan, seperti linter atau test runner.
+Kamu dapat menyimpannya di file terpisah seperti `requirements-dev.txt`.
+
+Contoh:
+
+```text
+# requirements-dev.txt
+pytest
+black
+flake8
+```
+
+Dalam project yang lebih modern, kamu biasanya memisahkan dependency runtime dan development.
+Runtime dependency diperlukan saat aplikasi berjalan, sementara development dependency hanya dipakai untuk membangun, menguji, atau memeriksa kode.
+
+### Menjaga Environment Lokal Tetap Bersih
+
+Jangan meng-install package development ke environment production.
+Jaga agar environment lokal terisolasi dengan nama yang jelas, misalnya `.venv`, dan jangan commit folder environment tersebut.
+
+Selalu gunakan `python -m pip install ...` untuk memastikan `pip` dijalankan oleh interpreter yang aktif.
+Jika ada lebih dari satu Python di mesin, ini mencegah kebingungan.
+
+Contoh instalasi yang lebih aman:
+
+```bash
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+### Menggunakan Sesuatu Seperti `requirements-dev.txt`
+
+`requirements-dev.txt` membantu tim memahami apa yang dibutuhkan untuk bekerja pada project.
+Jika hanya ada satu file dependency, penting untuk memberi komentar atau membagi dependency agar jelas mana yang dipakai saat runtime dan mana yang hanya untuk development.
+
+### Mengapa `pip install -e .` Berguna
+
+Instalasi editable (`pip install -e .`) sangat membantu ketika kamu sedang mengembangkan package.
+It membuat perubahan kode langsung terlihat tanpa harus meng-install ulang package.
+
+### Menggunakan `pip list` dan `pip check`
+
+Setelah meng-install paket, kamu bisa memeriksa ketergantungan dengan:
+
+```bash
+python -m pip list
+python -m pip check
+```
+
+`python -m pip check` akan memberitahu jika ada dependency yang rusak atau tidak kompatibel.
+
+### Requirements dan Reproducibility
+
+Selalu panggil pip melalui Python agar tidak tergantung pada path sistem:
+
+```bash
+python -m pip install requests
+```
+
+Perintah ini membantu menjaga konsistensi ketika ada lebih dari satu versi Python di mesin.
+
+Kamu juga bisa cek dependency yang terpasang dengan:
+
+```bash
+python -m pip list
+python -m pip check
+```
+
+### Package Index dan Instalasi Lokal
+
+`pip` biasanya mengambil paket dari PyPI.
+Untuk develop lokal, kamu dapat menggunakan:
+
+```bash
+pip install -e .
+```
+
+Perintah ini memasang project secara editable, sehingga perubahan kode langsung terlihat tanpa reinstall.
 
 ### Conda
 
@@ -126,6 +234,23 @@ Artinya kamu tetap harus mengelola:
 - kompatibilitas
 - reproducibility
 
+### Memilih Tool yang Tepat
+
+Untuk project kecil, `pip` + `venv` biasanya sudah cukup.
+Untuk aplikasi yang lebih besar atau tim yang membutuhkan packaging lebih ketat, pertimbangkan tool seperti Poetry atau Pipenv.
+
+Pilihan yang tepat bergantung pada:
+
+- skala project
+- kebutuhan packaging
+- preferensi tim
+- kompatibilitas dengan CI
+
+### Praktek Upgrade dan Perbaikan
+
+Setiap kali kamu memasang atau memperbarui package, periksa bahwa kamu berada di environment yang benar.
+`python -m pip install --upgrade pip` adalah langkah kecil yang membantu menghindari masalah kompatibilitas instalasi.
+
 ## Walkthrough Singkat
 
 Setup profesional yang sederhana sering terlihat seperti ini:
@@ -137,6 +262,23 @@ Setup profesional yang sederhana sering terlihat seperti ini:
 5. Catat dependency ke `requirements.txt` atau `pyproject.toml`.
 
 Proses ini membuat project lebih mudah dibagikan dan dirawat.
+
+### Contoh Setup Environment
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install requests flask
+python -m pip freeze > requirements.txt
+```
+
+Contoh isi `requirements.txt`:
+
+```text
+Flask==2.3.2
+requests==2.31.0
+```
 
 ## Aturan Praktis
 
