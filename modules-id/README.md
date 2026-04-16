@@ -38,6 +38,22 @@ Track ini mengajarkan cara bekerja seperti developer Python yang lebih rapi dan 
 - [Overview Track](./03-developer-environment/README.md)
 - [Menyusun Struktur Project Python](./03-developer-environment/01-structuring-a-project.md)
 - [Python Packages dan Environment](./03-developer-environment/02-python-packages-and-environments.md)
+- [Dependency Pinning dan Lockfile](./03-developer-environment/03-dependency-pinning-dan-lockfile.md)
+- [Setup Otomatis dan Bootstrapping](./03-developer-environment/04-setup-otomatis-dan-bootstrapping.md)
+- [Editor, Dotfiles, dan Konfigurasi Proyek](./03-developer-environment/05-editor-dan-konfigurasi-proyek.md)
+- [Testing dan CI untuk Project Python](./03-developer-environment/06-testing-dan-ci.md)
+- [Dokumentasi dan Onboarding Project Python](./03-developer-environment/07-dokumentasi-dan-onboarding.md)
+- [Security dan Dependency Audit dalam Project Python](./03-developer-environment/08-security-dan-dependency-audit.md)
+- [Packaging dan Distribusi Project Python](./03-developer-environment/09-packaging-dan-distribusi.md)
+- [Debugging dan Profiling Project Python](./03-developer-environment/10-debugging-dan-profiling.md)
+- [Docker dan Containerisasi untuk Project Python](./03-developer-environment/11-docker-dan-containerisasi.md)
+- [Team Workflow dan Release Management untuk Project Python](./03-developer-environment/12-team-workflow-dan-release-management.md)
+- [Poetry dan Modern Dependency Management](./03-developer-environment/13-poetry-dan-modern-dependency-management.md)
+- [CI/CD dan Release Pipeline untuk Project Python](./03-developer-environment/14-ci-cd-release-pipeline.md)
+- [Docker Compose dan Local Development](./03-developer-environment/15-docker-compose-dan-local-development.md)
+- [Observability dan Logging untuk Project Python](./03-developer-environment/16-observability-dan-logging.md)
+- [Dev Containers dan Remote Development](./03-developer-environment/17-devcontainers-dan-remote-development.md)
+- [Automated Documentation dan API Docs](./03-developer-environment/18-automated-documentation-dan-api-docs.md)
 
 ## Urutan Belajar yang Disarankan
 
